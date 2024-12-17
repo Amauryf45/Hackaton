@@ -1,0 +1,595 @@
+Classe 0: A
+Classe 1: H
+Classe 2: None
+Classe 3: P
+Classe 4: S
+Classe 5: T
+
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.54      0.56      0.55      9906
+           1       0.14      0.15      0.15       647
+           2       0.47      0.51      0.49      1624
+           3       0.63      0.65      0.64     11547
+           4       0.17      0.18      0.18       574
+           5       0.27      0.28      0.28      1722
+           6       0.95      0.94      0.94    168379
+
+    accuracy                           0.89    194399
+   macro avg       0.45      0.47      0.46    194399
+weighted avg       0.89      0.89      0.89    194399
+
+Confusion Matrix:
+ [[  5561     60     86    425     52    141   3581]
+ [    50    100      6     41      5     23    422]
+ [    76      9    824     81      6     18    610]
+ [   442     55     71   7530     36    109   3304]
+ [    63      4     15     54    103     17    318]
+ [   140     25     20    107     22    490    918]
+ [  4026    455    734   3656    378   1013 158117]]
+
+
+ 1. Classification Report
+Le rapport fournit des métriques clés pour chaque classe (0 à 6) ainsi que des moyennes globales.
+
+Métriques par classe :
+Precision :
+
+Fraction des prédictions positives qui sont réellement positives.
+Exemple : La classe 0 a une précision de 0.54, ce qui signifie que 54 % des prédictions de classe 0 sont correctes.
+Recall :
+
+Fraction des exemples d’une classe qui sont correctement identifiés.
+Exemple : La classe 0 a un rappel de 0.56, ce qui signifie que 56 % des instances de classe 0 ont été correctement identifiées.
+F1-score :
+
+Moyenne harmonique de la précision et du rappel.
+Exemple : La classe 0 a un F1-score de 0.55, ce qui reflète un équilibre entre précision et rappel.
+Support :
+
+Nombre d’instances réelles pour chaque classe dans le dataset de test.
+Exemple : La classe 0 a un support de 9906.
+Moyennes globales :
+Macro avg :
+
+Moyenne non pondérée des métriques par classe. Utile lorsque chaque classe a la même importance.
+Ici, la précision macro moyenne est 0.45, ce qui indique une faible performance globale.
+Weighted avg :
+
+Moyenne pondérée selon le support de chaque classe. Utile pour des classes déséquilibrées.
+Ici, la précision pondérée est 0.89, ce qui semble élevé à cause de la prédominance de la classe 6.
+Observations :
+La classe 6 domine les données (support = 168379), ce qui entraîne un modèle biaisé vers cette classe avec un F1-score très élevé (0.94).
+Les classes 1, 4, et 5 ont de faibles performances, ce qui peut indiquer un problème de données ou de modèle.
+2. Confusion Matrix
+La matrice montre les vraies étiquettes contre les prédictions.
+
+Lecture :
+Chaque cellule [i, j] indique combien d'instances de la classe réelle i ont été prédites comme appartenant à la classe j.
+Analyse par exemple :
+Classe 0 (première ligne) :
+
+5561 instances correctement prédites comme 0 (diagonale).
+3581 instances de la classe 0 prédites comme 6, ce qui montre une confusion importante avec la classe dominante.
+Classe 6 (dernière ligne) :
+
+158117 instances correctement prédites comme 6 (diagonale).
+Confusions limitées avec d'autres classes (734 prédites comme 2, 3656 comme 3).
+Observations :
+Le modèle confond beaucoup les autres classes avec la classe dominante 6.
+Les classes sous-représentées (ex. 1, 4) souffrent d’un faible rappel (ex. 100/647 pour la classe 1).
+3. Problèmes identifiés
+Classement déséquilibré :
+
+La classe 6 domine les données, ce qui biaise le modèle vers cette classe.
+Cela explique le F1-score élevé pour la classe 6 mais de faibles performances pour les autres classes.
+Classes sous-représentées :
+
+Les classes comme 1, 4, et 5 ont peu de données et sont mal prédites.
+Confusion importante :
+
+Les confusions dans la matrice (ex. 0 souvent prédit comme 6) montrent que le modèle n'arrive pas à différencier certaines classes.
+
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.61      0.63      0.62      8043
+           1       0.17      0.18      0.17       645
+           2       0.71      0.71      0.71     11061
+           3       0.20      0.19      0.20       584
+           4       0.28      0.30      0.29      1549
+           5       0.93      0.93      0.93     86116
+
+    accuracy                           0.86    107998
+   macro avg       0.48      0.49      0.49    107998
+weighted avg       0.87      0.86      0.87    107998
+
+Confusion Matrix:
+ [[ 5033    69   425    66   160  2290]
+ [   84   113    62     9    37   340]
+ [  460    81  7881    55   163  2421]
+ [   67    19    61   112    15   310]
+ [  162    25   140    25   467   730]
+ [ 2418   368  2477   289   808 79756]]
+F-beta Score: 0.8644789718328117
+
+
+
+_____________________________________________
+
+
+random forest
+
+=== Random Forest ===
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.91      0.59      0.72      8043
+           1       0.94      0.12      0.21       645
+           2       0.91      0.99      0.95     86116
+           3       0.95      0.68      0.79     11061
+           4       0.92      0.16      0.27       584
+           5       0.94      0.25      0.39      1549
+
+    accuracy                           0.91    107998
+   macro avg       0.93      0.47      0.56    107998
+weighted avg       0.91      0.91      0.90    107998
+
+Confusion Matrix:
+ [[ 4779     1  3204    51     1     7]
+ [   12    78   541    13     0     1]
+ [  316     2 85514   266     5    13]
+ [   95     1  3472  7488     2     3]
+ [   14     1   468     7    93     1]
+ [   30     0  1117    18     0   384]]
+F-beta Score: 0.9105353802848202
+
+no none
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.97      0.59      0.74      8043
+           1       0.96      0.12      0.21       645
+           2       0.00      0.00      0.00         0
+           3       0.99      0.68      0.80     11061
+           4       0.97      0.16      0.27       584
+           5       0.97      0.25      0.39      1549
+
+    accuracy                           0.59     21882
+   macro avg       0.81      0.30      0.40     21882
+weighted avg       0.98      0.59      0.72     21882
+
+Confusion Matrix:
+ [[4779    1 3204   51    1    7]
+ [  12   78  541   13    0    1]
+ [   0    0    0    0    0    0]
+ [  95    1 3472 7488    2    3]
+ [  14    1  468    7   93    1]
+ [  30    0 1117   18    0  384]]
+F-beta Score (Excluant 'None'): 0.5859610638881273
+
+
+
+1. Rapport de Classification
+Métriques clés pour chaque classe :
+Precision (Précision) :
+
+La fraction des prédictions positives correctes.
+Exemple : La classe 0 a une précision de 0.97, donc 97 % des instances prédites comme 0 sont correctes.
+Recall (Rappel) :
+
+La fraction des instances positives correctement identifiées.
+Exemple : La classe 0 a un rappel de 0.59, donc seulement 59 % des instances réellement appartenant à 0 sont correctement prédites.
+F1-score :
+
+Moyenne harmonique de la précision et du rappel. Indique un équilibre entre les deux.
+Exemple : La classe 0 a un F1-score de 0.74, ce qui est moyen en raison du faible rappel.
+Support :
+
+Nombre d'instances réelles dans le dataset de test pour chaque classe.
+Exemple : La classe 0 a un support de 8043, ce qui signifie qu'elle est bien représentée.
+Observations par classe :
+Classe 0 :
+
+Bonne précision (0.97), mais rappel faible (0.59).
+Cela signifie que le modèle est bon pour éviter les faux positifs mais échoue à détecter une part significative des vrais 0.
+Classe 1 :
+
+Précision correcte (0.96), mais rappel très faible (0.12).
+La faible capacité à détecter la classe 1 (12 % des instances seulement) montre que cette classe est mal apprise.
+Classe 2 :
+
+Toutes les métriques sont nulles (0.00), car le support est nul.
+Cela peut indiquer un problème de données (absence totale d'instances de classe 2 dans le test).
+Classe 3 :
+
+Performances solides avec un F1-score de 0.80, grâce à un rappel raisonnable (0.68) et une précision élevée (0.99).
+Classe 4 et 5 :
+
+Faibles performances globales, avec des F1-scores de 0.27 et 0.39 respectivement.
+Rappels très faibles (0.16 et 0.25) indiquent que ces classes sont sous-prédites.
+Moyennes globales :
+Accuracy (Exactitude) :
+
+Le modèle a une précision globale de 0.59 (59 %).
+Cela est largement influencé par les classes majoritaires (0 et 3).
+Macro avg :
+
+Moyenne non pondérée des métriques de chaque classe.
+Avec un rappel moyen de 0.30, le modèle a du mal à détecter les classes minoritaires.
+Weighted avg :
+
+Moyenne pondérée par le support de chaque classe.
+Les scores pondérés (ex. Précision = 0.98) sont fortement biaisés par les classes majoritaires.
+2. Matrice de Confusion
+Lecture de la matrice :
+Chaque cellule [i, j] représente le nombre d'instances de la classe réelle i prédites comme j.
+Observations :
+Classe 0 :
+
+4779 instances correctement prédites ([0,0]).
+3204 instances confondues avec la classe 2 ([0,2]), ce qui montre une confusion importante.
+Classe 3 :
+
+7488 instances correctement prédites ([3,3]).
+Une forte confusion avec la classe 2 (3472 instances), ce qui est problématique.
+Classe 5 :
+
+Seulement 384 instances correctement prédites ([5,5]), mais 1117 instances confondues avec la classe 2 ([5,2]).
+3. F-beta Score
+F-beta Score (Excluant 'None') = 0.59 :
+Ce score est influencé par le faible rappel des classes minoritaires.
+La pondération favorisant la précision explique pourquoi ce score est légèrement meilleur que le rappel global (macro avg = 0.30).
+4. Analyse des problèmes et pistes d'amélioration
+Problèmes identifiés :
+Classe dominante :
+
+Les classes majoritaires (0 et 3) dominent les prédictions, ce qui biaise les métriques pondérées.
+Confusion inter-classes :
+
+Forte confusion entre les classes minoritaires (1, 4, 5) et la classe 2.
+Rappel très faible :
+
+Les classes minoritaires ont un rappel faible (ex. 1, 4).
+Classe 2 absente :
+
+Aucune instance de la classe 2 dans le dataset de test.
+Pistes d'amélioration :
+Rééquilibrer les données :
+
+Utilisez des techniques comme le sur-échantillonnage (SMOTE) ou le sous-échantillonnage pour équilibrer les classes dans l'entraînement.
+Ajuster les poids des classes :
+
+Modifier les class_weight dans le modèle pour accorder plus d'importance aux classes minoritaires.
+Explorer des modèles plus robustes :
+
+Tester des modèles comme XGBoost, LightGBM, ou des réseaux neuronaux (MLP).
+Optimiser les hyperparamètres :
+
+Effectuer une recherche d'hyperparamètres pour améliorer le rappel des classes minoritaires.
+Vérifier les données :
+
+Assurez-vous que la classe 2 est bien représentée dans les données d'entraînement et de test.
+
+
+=== XGBoost ===
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.83      0.50      0.62      8043
+           1       0.89      0.13      0.22       645
+           2       0.89      0.99      0.94     86116
+           3       0.92      0.62      0.74     11061
+           4       0.71      0.15      0.25       584
+           5       0.86      0.22      0.35      1549
+
+    accuracy                           0.89    107998
+   macro avg       0.85      0.43      0.52    107998
+weighted avg       0.89      0.89      0.88    107998
+
+Confusion Matrix:
+ [[ 4025     3  3921    76    10     8]
+ [   24    81   525     9     1     5]
+ [  602     5 85007   450    20    32]
+ [  131     2  4101  6817     3     7]
+ [   20     0   469     6    88     1]
+ [   40     0  1151    18     2   338]]
+F-beta Score: 0.8922017074390267
+
+
+=== XGBoost (Excluant 'None') ===
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.95      0.50      0.66      8043
+           1       0.94      0.13      0.22       645
+           2       0.00      0.00      0.00         0
+           3       0.98      0.62      0.76     11061
+           4       0.85      0.15      0.26       584
+           5       0.94      0.22      0.35      1549
+
+    accuracy                           0.52     21882
+   macro avg       0.78      0.27      0.37     21882
+weighted avg       0.96      0.52      0.66     21882
+
+Confusion Matrix:
+ [[4025    3 3921   76   10    8]
+ [  24   81  525    9    1    5]
+ [   0    0    0    0    0    0]
+ [ 131    2 4101 6817    3    7]
+ [  20    0  469    6   88    1]
+ [  40    0 1151   18    2  338]]
+F-beta Score (Excluant 'None'): 0.5186454620235811
+
+apport de Classification
+Métriques clés pour chaque classe :
+Classe 0 (support = 8043) :
+
+Précision : 0.95 – Les prédictions pour cette classe sont généralement correctes.
+Rappel : 0.50 – Seulement 50 % des vraies instances de classe 0 sont détectées.
+F1-score : 0.66 – Performances moyennes dues au faible rappel.
+Classe 1 (support = 645) :
+
+Précision : 0.94 – Les prédictions pour 1 sont fiables.
+Rappel : 0.13 – Seulement 13 % des instances de la classe 1 sont détectées.
+F1-score : 0.22 – Très faible, indiquant un problème à capturer cette classe.
+Classe 2 (support = 0) :
+
+Toutes les métriques sont nulles.
+Cela indique qu'aucune instance de la classe 2 n'est présente dans le test.
+Classe 3 (support = 11061) :
+
+Précision : 0.98 – Très bonne.
+Rappel : 0.62 – Meilleure détection, mais encore des lacunes (38 % manquants).
+F1-score : 0.76 – Performances solides.
+Classe 4 (support = 584) :
+
+Précision : 0.85 – Correcte.
+Rappel : 0.15 – Faible (seulement 15 % des instances détectées).
+F1-score : 0.26 – Indique que la classe est mal apprise.
+Classe 5 (support = 1549) :
+
+Précision : 0.94 – Bonne précision.
+Rappel : 0.22 – Très faible capacité à identifier cette classe.
+F1-score : 0.35 – Faible.
+Moyennes globales :
+Exactitude globale (Accuracy) :
+
+52 %, ce qui est assez faible pour un problème multi-classes.
+Macro avg :
+
+Précision : 0.78 – Bonne, mais biaisée par les classes majoritaires (0 et 3).
+Rappel : 0.27 – Indique que les classes minoritaires ne sont pas bien détectées.
+F1-score : 0.37 – Reflète une performance moyenne globale.
+Weighted avg :
+
+Précision : 0.96 – Forte, car les classes majoritaires dominent les prédictions.
+Rappel : 0.52 – Aligné avec l’accuracy.
+F1-score : 0.66 – Indique des déséquilibres significatifs.
+2. Matrice de Confusion
+La matrice montre d’importantes confusions inter-classes, particulièrement entre les classes 0, 3, et 2.
+
+Exemples clés :
+Classe 0 :
+
+4025 instances correctement classées ([0, 0]).
+3921 instances de 0 confondues avec 2 ([0, 2]), montrant une confusion majeure.
+Classe 3 :
+
+6817 instances correctement classées ([3, 3]).
+4101 instances confondues avec 2 ([3, 2]), ce qui est problématique.
+Classe 5 :
+
+338 instances correctement classées ([5, 5]).
+1151 instances confondues avec 2 ([5, 2]).
+Observations générales :
+La classe 2 est le "piège" principal. Elle est prédite par erreur dans presque toutes les classes.
+Les classes minoritaires (1, 4, 5) ont des rappels très faibles.
+3. F-beta Score
+Le F-beta Score (Excluant 'None') = 0.52 est principalement influencé par le rappel faible des classes minoritaires. Cela montre que le modèle n'apprend pas bien à capturer ces classes, même en excluant la classe dominante.
+
+4. Problèmes Identifiés
+Déséquilibre des classes :
+
+Les classes 0 et 3 dominent le dataset, ce qui biaise le modèle vers ces classes.
+Les classes 1, 4, et 5 sont sous-représentées et donc mal apprises.
+Confusion généralisée avec la classe 2 :
+
+Le modèle semble prédire 2 dans de nombreux cas, même si cette classe n'est pas présente dans le support.
+Faibles rappels pour les classes minoritaires :
+
+Indique un manque de représentativité ou une faible séparation dans l’espace des caractéristiques.
+5. Recommandations pour Améliorer le Modèle
+A. Rééquilibrage des classes
+Sur-échantillonnage des classes minoritaires :
+
+Utilisez une technique comme SMOTE (Synthetic Minority Oversampling Technique) pour augmenter artificiellement le nombre d'instances des classes 1, 4, et 5.
+Sous-échantillonnage des classes majoritaires :
+
+Réduisez le nombre d'instances pour les classes 0 et 3.
+B. Ajuster les poids des classes
+Modifiez le paramètre class_weight du modèle pour accorder plus d'importance aux classes minoritaires :
+python
+Copier le code
+rf_model = RandomForestClassifier(random_state=42, class_weight="balanced")
+C. Analyse des caractéristiques
+Features engineering :
+Ajoutez des caractéristiques dérivées, comme la norme des accélérations ou la variance.
+Sélection des caractéristiques :
+Identifiez les caractéristiques les plus discriminantes pour réduire les confusions inter-classes.
+D. Tester d'autres modèles
+Gradient Boosting (XGBoost, LightGBM) :
+Ces modèles gèrent mieux les déséquilibres de classes et les relations complexes.
+Réseaux Neuronaux :
+Entraînez un réseau neuronal simple (MLP) pour capturer les relations non linéaires dans les données.
+E. Valider avec une matrice de confusion normalisée
+Une matrice normalisée mettra en évidence les ratios de confusions :
+python
+Copier le code
+from sklearn.metrics import ConfusionMatrixDisplay
+
+ConfusionMatrixDisplay.from_estimator(rf_model, X_test, y_test, normalize='true')
+
+
+=== LightGBM ===
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.43      0.66      0.52      8043
+           1       0.04      0.54      0.08       645
+           2       0.98      0.70      0.82     86116
+           3       0.61      0.72      0.66     11061
+           4       0.05      0.56      0.10       584
+           5       0.13      0.54      0.21      1549
+
+    accuracy                           0.70    107998
+   macro avg       0.38      0.62      0.40    107998
+weighted avg       0.88      0.70      0.77    107998
+
+Confusion Matrix:
+ [[ 5335   777   457   352   614   508]
+ [   58   346    38    28    89    86]
+ [ 6232  6051 60633  4542  4440  4218]
+ [  608   997   372  7957   534   593]
+ [   42    97    21    24   326    74]
+ [  137   238    80    60   191   843]]
+F-beta Score: 0.6985314542861905
+
+=== LightGBM (Excluant 'None') ===
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.86      0.66      0.75      8043
+           1       0.14      0.54      0.22       645
+           2       0.00      0.00      0.00         0
+           3       0.94      0.72      0.82     11061
+           4       0.19      0.56      0.28       584
+           5       0.40      0.54      0.46      1549
+
+    accuracy                           0.68     21882
+   macro avg       0.42      0.50      0.42     21882
+weighted avg       0.83      0.68      0.74     21882
+
+Confusion Matrix:
+ [[5335  777  457  352  614  508]
+ [  58  346   38   28   89   86]
+ [   0    0    0    0    0    0]
+ [ 608  997  372 7957  534  593]
+ [  42   97   21   24  326   74]
+ [ 137  238   80   60  191  843]]
+F-beta Score (Excluant 'None'): 0.6766748926057947
+
+
+1. Rapport de Classification
+Métriques clés par classe :
+Classe 0 :
+
+Précision : 0.86 – Le modèle prédit correctement la plupart des instances 0.
+Rappel : 0.66 – Le modèle détecte 66 % des vrais 0.
+F1-score : 0.75 – Les performances sont bonnes, mais le rappel pourrait être amélioré.
+Classe 1 :
+
+Précision : 0.14 – Très faible. Beaucoup de prédictions de classe 1 sont incorrectes.
+Rappel : 0.54 – Le modèle détecte 54 % des instances réelles de 1.
+F1-score : 0.22 – Faible en raison de la mauvaise précision.
+Classe 2 :
+
+Toutes les métriques sont nulles.
+Cela indique l'absence de cette classe dans le test ou un problème de données.
+Classe 3 :
+
+Précision : 0.94 – Très bonne précision.
+Rappel : 0.72 – Le modèle détecte 72 % des vrais 3.
+F1-score : 0.82 – Solide, mais encore une marge pour améliorer le rappel.
+Classe 4 :
+
+Précision : 0.19 – Faible. La majorité des prédictions de 4 sont incorrectes.
+Rappel : 0.56 – Le modèle détecte plus de la moitié des vrais 4.
+F1-score : 0.28 – Faible en raison de la faible précision.
+Classe 5 :
+
+Précision : 0.40 – Moyenne.
+Rappel : 0.54 – Le modèle détecte 54 % des vrais 5.
+F1-score : 0.46 – Indique une amélioration par rapport aux classes 1 et 4.
+Moyennes globales :
+Exactitude globale (Accuracy) :
+
+68 % – Indique que 68 % des prédictions globales sont correctes. Cela est principalement dû aux classes majoritaires (0 et 3).
+Macro avg :
+
+Précision : 0.42 – Moyenne non pondérée, reflète la faible performance sur les classes minoritaires.
+Rappel : 0.50 – Indique une détection relativement équilibrée, mais faible pour certaines classes.
+F1-score : 0.42 – Montre que les classes minoritaires tirent vers le bas les performances globales.
+Weighted avg :
+
+Précision : 0.83 – Forte, car les classes majoritaires biaisent le modèle.
+Rappel : 0.68 – Identique à l’accuracy, influencée par les classes majoritaires.
+F1-score : 0.74 – Reflète une bonne performance globale, mais déséquilibrée.
+2. Matrice de Confusion
+La matrice montre les erreurs de classification et les confusions entre classes.
+
+Observations clés :
+Classe 0 :
+
+5335 instances correctement classées ([0,0]).
+614 confondues avec 4, et 508 avec 5. Le modèle a du mal à différencier ces classes.
+Classe 1 :
+
+346 instances correctement classées ([1,1]).
+Des confusions importantes avec 4 (89) et 5 (86), ce qui montre que le modèle ne sépare pas bien ces classes.
+Classe 3 :
+
+7957 instances correctement classées ([3,3]).
+Forte confusion avec 0 (608) et 1 (997).
+Classe 4 :
+
+326 instances correctement classées ([4,4]).
+Forte confusion avec 0 (42) et 1 (97).
+Classe 5 :
+
+843 instances correctement classées ([5,5]).
+238 confondues avec 1 et 191 avec 4.
+3. F-beta Score
+F-beta Score = 0.68 :
+Ce score montre une amélioration globale, mais il reste biaisé par les classes majoritaires.
+Les classes 1, 4, et 5 avec des F1-scores faibles affectent les performances globales.
+4. Problèmes Identifiés
+Confusions entre classes proches (1, 4, et 5) :
+
+Ces classes partagent probablement des caractéristiques similaires dans l’espace des données, rendant leur séparation difficile.
+Classe 2 absente :
+
+Aucune prédiction ou support pour 2. Cela pourrait être dû à un problème de déséquilibre ou à une absence dans le test.
+Faibles performances pour les classes minoritaires :
+
+Les classes 1, 4, et 5 ont des métriques faibles, ce qui montre un déséquilibre dans les données.
+5. Recommandations pour Améliorer les Performances
+A. Rééquilibrage des données
+Sur-échantillonnage (SMOTE) :
+
+Générer des échantillons synthétiques pour les classes 1, 4, et 5 afin de les rendre plus représentées.
+Sous-échantillonnage des classes majoritaires :
+
+Réduire les instances de 0 et 3 pour équilibrer les données.
+B. Analyse des caractéristiques
+Créer des caractéristiques dérivées :
+
+Calculer des statistiques supplémentaires (moyenne, variance) ou des normes vectorielles pour mieux séparer les classes proches.
+Réduction de la dimensionnalité :
+
+Utiliser PCA ou t-SNE pour visualiser et réduire l’impact des caractéristiques redondantes.
+C. Amélioration du modèle
+Testez XGBoost ou LightGBM :
+
+Ces algorithmes gèrent mieux les déséquilibres et capturent les relations complexes.
+Optimisez les hyperparamètres :
+
+Utilisez GridSearchCV ou RandomizedSearchCV pour trouver les meilleurs paramètres pour le modèle actuel.
+D. Validation croisée stratifiée
+Effectuez une validation croisée stratifiée pour vous assurer que les classes sont équilibrées dans chaque pli.
